@@ -10,3 +10,5 @@ references).
 Ideas and corrections are welcome!
 
 V.Zavjalov
+
+![Example](https://github.com/slazav/he3data/blob/master/ex.png)
