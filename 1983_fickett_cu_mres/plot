@@ -1,0 +1,22 @@
+#!/usr/bin/gnuplot
+
+set log
+set key left
+
+set xlabel "RRR * B"
+set ylabel "dR/R"
+set title "Magnetoresistance of copper"
+
+plot [1e4:1e8] [0.0001:10]\
+ "../1959_launau_cu_mres/1959-launau_long.txt" using 1:2 with linespoints pt 6 title "Launau-1959 long",\
+ "../1959_launau_cu_mres/1959-launau_trans.txt" using 1:2 with linespoints pt 6 title "Launau-1959 trans",\
+ "fickett1_054.txt" using (1e4*$1*54):($2/16.03-1)  with linespoints pt 5 title "Fickett, rrr=54",\
+ "fickett1_067.txt" using (1e4*$1*67):($2/13.24-1)  with linespoints pt 5 title "Fickett, rrr=67",\
+ "fickett1_089.txt" using (1e4*$1*89):($2/9.873-1)  with linespoints pt 5 title "Fickett, rrr=89",\
+ "fickett1_238.txt" using (1e4*$1*238):($2/3.601-1) with linespoints pt 5 title "Fickett, rrr=238",\
+ "fickett2_065.txt" using (1e4*$1*65):($2/13.03-1)  with linespoints pt 5 title "Fickett, rrr=65",\
+ "fickett2_105.txt" using (1e4*$1*105):($2/8.031-1)  with linespoints pt 5 title "Fickett, rrr=105",\
+ "fickett2_164.txt" using (1e4*$1*164):($2/5.251-1)  with linespoints pt 5 title "Fickett, rrr=164",\
+ "fickett2_488.txt" using (1e4*$1*488):($2/1.791-1)  with linespoints pt 5 title "Fickett, rrr=488",\
+
+pause -1

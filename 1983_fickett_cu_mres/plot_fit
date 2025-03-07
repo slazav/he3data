@@ -1,0 +1,25 @@
+#!/usr/bin/gnuplot
+
+set log
+set key left
+
+set xlabel "RRR * B"
+set ylabel "dR/R"
+set title "Magnetoresistance of copper"
+
+f1(x) = a1 + b1*x + c1*x**2
+fit f1(x) "../1959_launau_cu_mres/1959-launau_trans_.txt" using (log($1)):(log($2)) via a1,b1,c1
+
+f2(x) = a2 + b2*x + c2*x**2
+fit f2(x)"../1959_launau_cu_mres/1959-launau_long_.txt" using (log($1)):(log($2)) via a2,b2,c2
+
+
+plot [1e4:1e8] [0.0001:10]\
+ "../1959_launau_cu_mres/1959-launau_long.txt" using 1:2 with points pt 6 title "Launau-1959 long",\
+ "../1959_launau_cu_mres/1959-launau_trans.txt" using 1:2 with points pt 6 title "Launau-1959 trans",\
+ "fickett1_054.txt" using (1e4*$1*54):($2/16.03-1)  with points pt 5 title "Fickett, rrr=54",\
+ "fickett2_488.txt" using (1e4*$1*488):($2/1.791-1)  with points pt 5 title "Fickett, rrr=488",\
+ exp(f1(log(x))) lc 0 notitle,\
+ exp(f2(log(x))) lc 0 notitle
+ 
+pause -1
